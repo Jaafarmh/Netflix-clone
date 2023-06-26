@@ -1,9 +1,10 @@
 
-import { UserAuth } from "../context/authContext";
+import { useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
+import { selectCurrentUser } from "../userSlice";
 
 const ProtectedRoute = ({children}) => {
-    const {currentUser} = UserAuth()
+    const currentUser = useSelector(selectCurrentUser)
 
     return (
         <>

@@ -1,8 +1,16 @@
 import {Link} from 'react-router-dom';
-import { UserAuth } from '../context/authContext';
+import { useSelector } from 'react-redux';
+import { selectCurrentUser } from '../userSlice';
+import { signOut } from 'firebase/auth';
+import { auth } from '../firebase';
 
 const Navbar = () => {
-    const {currentUser, logOut} = UserAuth();
+    const currentUser = useSelector(selectCurrentUser)
+    
+    const logOut=() =>{
+        return signOut(auth)
+    }
+
     return (
         <div className=' absolute z-50 flex items-center p-4 justify-between w-full'>
 

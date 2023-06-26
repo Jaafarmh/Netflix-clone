@@ -1,14 +1,15 @@
 import {FiHeart} from 'react-icons/fi'
 import {AiFillHeart} from 'react-icons/ai'
 import { useState } from 'react';
-import { UserAuth } from '../context/authContext';
 import { arrayUnion, doc, updateDoc } from "firebase/firestore";
 import { db } from '../firebase';
+import { useSelector } from 'react-redux';
+import { selectCurrentUser } from '../userSlice';
 
 const Movie = ({item}) => {
     const [like, setLike] = useState(false)
     const [saved, setSaved] = useState(false)
-    const {currentUser} = UserAuth();
+    const currentUser = useSelector(selectCurrentUser)
 
     const movieRef= doc(db,'users',`${currentUser?.email}`)
 

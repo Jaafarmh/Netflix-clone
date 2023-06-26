@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 import { MdChevronLeft, MdChevronRight } from "react-icons/md";
-import { UserAuth } from "../context/authContext";
 import { doc, onSnapshot,updateDoc } from "firebase/firestore";
 import { db } from "../firebase";
 import {AiOutlineClose} from 'react-icons/ai'
+import { useSelector } from "react-redux";
+import { selectCurrentUser } from "../userSlice";
 const SavedShowes = () => {
     const [movies, setMovies] =useState([])
-    const {currentUser}= UserAuth()
+    const currentUser = useSelector(selectCurrentUser)
     
     useEffect(()=>{
         onSnapshot(doc(db,'users',`${currentUser?.email}`),(doc)=>{
